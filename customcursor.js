@@ -40,19 +40,28 @@ function customCursor() {
             addCSS(css);
         });
 
-        const aTag = document.querySelectorAll("a");
-        aTag.forEach(tag => {
-            tag.addEventListener("mouseover", function () {
+        function cursorEffectFor(params) {
+            let tag = params;
+
+            function cursorBig() {
                 css.width = "3rem";
                 css.height = "3rem";
                 addCSS(css);
-            });
-            tag.addEventListener("mouseleave", function () {
+            }
+            function cursorSmall() {
                 css.width = "1.5rem";
                 css.height = "1.5rem";
                 addCSS(css);
+            }
+            tag.forEach(tag => {
+                tag.addEventListener("mouseover", cursorBig);
+                tag.addEventListener("mouseleave", cursorSmall);
             });
-        });
+        }
+
+        cursorEffectFor(document.querySelectorAll("A"));
+        cursorEffectFor(document.querySelectorAll("BUTTON"));
+        cursorEffectFor(document.querySelectorAll("#themeToggler"));
     }
 }
 setTimeout(() => { customCursor() }, 1000);
